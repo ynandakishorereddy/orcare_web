@@ -11,7 +11,7 @@
       "template": "./index.html"
     },
     "extra": {
-      "apiBaseUrl": "http://localhost:3000",
+      "apiBaseUrl": "http://180.235.121.253:8182",
       "geminiApiKey": ""
     }
   }
