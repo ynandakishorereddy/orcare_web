@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Read(//tmp/**)",
+      "Bash(node -e \"const rnw = require\\('./node_modules/react-native-web/dist/index.js'\\); console.log\\('TurboModuleRegistry:', typeof rnw.TurboModuleRegistry\\);\")",
+      "Bash(node -e \"const r = require\\('./node_modules/react-native-web/dist/cjs/index.js'\\); console.log\\('TurboModuleRegistry:', typeof r.TurboModuleRegistry\\);\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(list\\(d.get\\('exports',{}\\).items\\(\\)\\)[:5] if 'exports' in d else d.get\\('main',''\\)\\)\")",
+      "Bash(grep -v \"^$\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({k:d[k] for k in ['main','module','exports'] if k in d}, indent=2\\)\\)\")",
+      "Bash(node -e \"const p=require\\('./node_modules/react-native-screens/package.json'\\); console.log\\(JSON.stringify\\({main:p.main,module:p.module,exports:p.exports},null,2\\)\\)\")"
+    ]
+  }
+}

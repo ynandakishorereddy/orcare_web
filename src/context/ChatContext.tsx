@@ -84,23 +84,6 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     setHistory([]);
   }
 
-  async function sendSymptomQuery(symptom: string) {
-    const query = `I am experiencing ${symptom}. What could be causing this, and what should I do?`;
-    await sendMessage(query);
-  }
-
-  function startNewSession() {
-    setMessages([
-      {
-        id: 'welcome-' + Date.now(),
-        text: "Hello! I'm ORCare AI, your friendly oral health assistant. How can I help you today?",
-        isFromUser: false,
-        timestamp: new Date(),
-      },
-    ]);
-    setHistory([]);
-  }
-
   return (
     <ChatContext.Provider value={{ messages, isTyping, sendMessage, sendSymptomQuery, startNewSession }}>
       {children}

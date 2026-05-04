@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="%LANG_ISO_CODE%">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>%WEB_TITLE%</title>
+    <title>ORCare</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <style id="expo-reset">
-      html, body { height: 100%; }
-      body { overflow: hidden; }
+    <style>
+      html, body { height: 100%; margin: 0; padding: 0; }
+      body { overflow: hidden; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
       #root { display: flex; height: 100%; flex: 1; }
-    </style>
-    <style id="font-override">
-      /* Apply Inter globally via CSS inheritance for React Native Web */
-      html, body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
     </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!-- Early error handler — fires BEFORE main.tsx is evaluated -->
+    <script>
+      window._showError = function(title, detail) {
+        var div = document.createElement('div');
+        div.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:99999;padding:24px;font-family:monospace;overflow:auto;color:#c00;white-space:pre-wrap';
+        div.innerHTML = '<b style="font-size:18px">' + title + '</b>\n\n' + String(detail).replace(/</g,'&lt;');
+        document.body.appendChild(div);
+      };
+      window.onerror = function(msg, src, line, col, err) {
+        window._showError('Runtime Error', err ? (err.stack || String(err)) : String(msg));
+      };
+      window.addEventListener('unhandledrejection', function(e) {
+        window._showError('Unhandled Promise Rejection', e.reason && e.reason.stack ? e.reason.stack : String(e.reason));
+      });
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

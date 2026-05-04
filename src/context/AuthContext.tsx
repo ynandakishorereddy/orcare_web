@@ -100,7 +100,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await saveSession(data.token, data.user);
       setLoginState({ status: 'success', message: 'Login successful' });
     } catch (e: any) {
-      setLoginState({ status: 'error', message: e?.response?.data?.message ?? 'Login failed. Check your credentials.' });
+      const msg = e?.response?.data?.message
+        ?? (e?.code === 'ERR_NETWORK' ? 'Cannot reach server. Check your connection.' : 'Login failed. Check your credentials.');
+      setLoginState({ status: 'error', message: msg });
     }
   }
 
@@ -110,7 +112,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await apiService.register(name, email, password, age, gender, lang);
       setRegisterState({ status: 'success', message: 'Account created! Please verify your email.' });
     } catch (e: any) {
-      setRegisterState({ status: 'error', message: e?.response?.data?.message ?? 'Registration failed.' });
+      const msg = e?.response?.data?.message
+        ?? (e?.code === 'ERR_NETWORK' ? 'Cannot reach server. Check your connection.' : 'Registration failed.');
+      setRegisterState({ status: 'error', message: msg });
     }
   }
 
